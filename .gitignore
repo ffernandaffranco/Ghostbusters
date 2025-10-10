@@ -1,0 +1,43 @@
+# Archivos compilados y de build
+*.class
+out/
+bin/
+target/
+dist/
+nbbuild/
+
+# Archivos de log
+*.log
+
+### IntelliJ IDEA ###
+# Carpetas de configuración específicas del usuario
+.idea/
+
+# Archivos de configuración de módulos
+*.iml
+*.ipr
+*.iws
+
+# Cache de Kotlin
+.kotlin
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+# Archivos de metadatos del sistema
+.DS_Store
