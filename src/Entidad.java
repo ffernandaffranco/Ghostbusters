@@ -2,25 +2,28 @@ import processing.core.PApplet;
 import processing.core.PImage;import processing.core.PImage;
 
 public abstract class Entidad {
-    // Atributos comunes a todas las entidades.
 
-    protected float x,y; // Posición en la pantalla
-    protected int ancho, alto; // Dimensiones para la hitbox
+    protected float x,y;
     protected PImage imagen;
+    protected PApplet sketch; // Ni idea que es esto, gemini dice que es esencial para que Processing pueda dibujar
     protected int velocidad;
 
-    public Entidad(float x, float y, PImage imagen, int ancho, int alto, int velocidad) {
+    public Entidad(PApplet sketch, float x, float y, PImage imagen, int velocidad) {
+        this.sketch = sketch;
         this.x = x;
         this.y = y;
         this.imagen = imagen;
-        this.ancho = imagen.width;
-        this.alto = imagen.weigth;
-        int velocidad;
+        this.velocidad = velocidad;
     }
 
     public abstract void mover();
-    // Después hay que implementarlo
-    public void dibujar();
-    // Después hay que implementarlo
 
+    public void dibujar() {
+        sketch.image(this.imagen, this.x, this.y);
+    }
+
+    public float getX() { return x; }
+    public float getY() { return y; }
+    public int getAncho { return imagen.width; }
+    public int getAlto { return imagen.height; }
 }

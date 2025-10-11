@@ -3,13 +3,17 @@ import processing.core.PImage;
 
 public class Proyectil extends Entidad {
 
-    public Proyectil(float x, float y, PImage imagen, float velocidad) {
+    private int velocidad;
+    private int direccion;
 
-        super(//lo que sea que herede)
+    public Proyectil(PApplet sketch, float x, float y, PImage imagen, int velocidad, int direccion) {
+        super(sketch, x, y, imagen);
+        this.velocidad = velocidad;
+        this.direccion = direccion;
     }
 
     @Override
     public void mover() {
+        // multiplicamos velocidad x direccion y nos queda para donde se mueve
     }
-
 }
