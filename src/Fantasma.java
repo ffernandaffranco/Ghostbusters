@@ -4,6 +4,7 @@ import processing.core.PImage;
 public class Fantasma extends Entidad {
 
     private int puntosDeVida;
+    public int score;
 
     public Fantasma(PApplet sketch, float x, float y, PImage imagen, int velocidad, int puntosDeVida) {
         super(sketch, x, y, imagen, velocidad);

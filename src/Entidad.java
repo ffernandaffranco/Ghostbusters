@@ -18,6 +18,8 @@ public abstract class Entidad {
 
     public abstract void mover();
 
+    public abstract void estarVivo();
+
     public void dibujar() {
         sketch.image(this.imagen, this.x, this.y);
     }
