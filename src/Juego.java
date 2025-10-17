@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Juego {
     public boolean isGameOver;
     public int puntaje; // usa el atributo publico score de fantasma
@@ -5,6 +7,18 @@ public class Juego {
     public int fase;
     // listaFantasmas
     // listaProyectiles
+
+    private ArrayList<Proyectil> proyectilesJugador;
+
+    public Juego(PApplet sketch, Jugador jugador) {
+        this.proyectilesJugador = new ArrayList<>();
+    }
+
+    public void agregarProyectilJugador(Proyectil p) {
+        if (p != null) {
+            this.proyectilesJugador.add(p);
+        }
+    }
 
     public void detectarColision() {
         // ver si coinciden las posiciones de 2 entidades y actuar dependiendo de que entidad es

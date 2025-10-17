@@ -3,9 +3,9 @@ import processing.core.PImage;import processing.core.PImage;
 
 public abstract class Entidad {
 
+    protected PApplet sketch; // Ni idea que es esto, gemini dice que es la ventana de Processing para poder dibujar
     protected float x,y;
     protected PImage imagen;
-    protected PApplet sketch; // Ni idea que es esto, gemini dice que es esencial para que Processing pueda dibujar
     protected int velocidad;
 
     public Entidad(PApplet sketch, float x, float y, PImage imagen, int velocidad) {
@@ -16,16 +16,19 @@ public abstract class Entidad {
         this.velocidad = velocidad;
     }
 
+    // public abstract void estarVivo();
+    // borré estarVivo porque no se si necesariamente vamos a implementarlo en todas las clases
+
     public abstract void mover();
 
-    public abstract void estarVivo();
-
     public void dibujar() {
-        sketch.image(this.imagen, this.x, this.y);
+        if (imagen != null) {
+            sketch.image(this.imagen, this.x, this.y);
+        }
     }
 
     public float getX() { return x; }
     public float getY() { return y; }
-    public int getAncho { return imagen.width; }
-    public int getAlto { return imagen.height; }
+    public int getAncho() { return imagen.width; }
+    public int getAlto() { return imagen.height; }
 }

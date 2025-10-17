@@ -9,11 +9,12 @@ public class Fantasma extends Entidad {
     public Fantasma(PApplet sketch, float x, float y, PImage imagen, int velocidad, int puntosDeVida) {
         super(sketch, x, y, imagen, velocidad);
         this.puntosDeVida = puntosDeVida;
+        this.score = score;
     }
 
     @Override
     public void mover() {
-        this.x += this.velocidad; // este es un ejemplo boludo donde el fantasma se mueve recto de derecha a izquierda
+        this.x -= this.velocidad; // ejemplo boludo: el fantasma se mueve constantemente hacia la izquierda a una velocidad constante
     }
 
     public void recibirDaño() {
@@ -24,10 +25,16 @@ public class Fantasma extends Entidad {
         return this.puntosDeVida > 0;
     }
 
-    public Proyectil disparar() {
-        // aca hay q implementar el disparo enemigo como va a funcionar
+    public boolean estaFueraDePantalla() { // para saber si se fue de la pantalla, lo podemos usar para borrar entidades que no veamos
+        return this.x < -this.getAncho()
     }
 
-
-
+    public Proyectil disparar(PImage imagenProyectilEnemigo) {
+        if (sketch.random(1) < 0.005) {
+            float posX = this.x;
+            float posY = this.y + this.getAlto() / 2;
+            return new Proyectil(sketch, posX, posY, imagenProyectilEnemigo, 8, -1);
+        }
+        return null;
+    }
 }
