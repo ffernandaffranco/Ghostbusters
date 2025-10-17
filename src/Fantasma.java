@@ -3,8 +3,8 @@ import processing.core.PImage;
 
 public class Fantasma extends Entidad {
 
-    private int puntosDeVida;
-    public int score;
+    private int puntosDeVida = 1;
+    public int score = 10;
 
     public Fantasma(PApplet sketch, float x, float y, PImage imagen, int velocidad, int puntosDeVida) {
         super(sketch, x, y, imagen, velocidad);
@@ -26,7 +26,7 @@ public class Fantasma extends Entidad {
     }
 
     public boolean estaFueraDePantalla() { // para saber si se fue de la pantalla, lo podemos usar para borrar entidades que no veamos
-        return this.x < -this.getAncho()
+        return this.x < -this.getAncho();
     }
 
     public Proyectil disparar(PImage imagenProyectilEnemigo) {

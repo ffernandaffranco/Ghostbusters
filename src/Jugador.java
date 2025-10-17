@@ -17,7 +17,7 @@ public class Jugador extends Entidad {
         float posX = this.x + this.getAncho();
         float posY = this.y + this.getAlto() / 2;
 
-        return new Proyectil(sketch, posX, posY, imagenProyectil, 15, 1)
+        return new Proyectil(sketch, posX, posY, imagenProyectil, 15, 1);
     }
 
     public void perderVida() {

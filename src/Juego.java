@@ -1,17 +1,22 @@
 import java.util.ArrayList;
 
 public class Juego {
-    public boolean isGameOver;
-    public int puntaje; // usa el atributo publico score de fantasma
-    public int vidas;
-    public int fase;
-    // listaFantasmas
-    // listaProyectiles
 
+    private PApplet sketch;
+    private Jugador jugador;
+    private ArrayList<Fantasma> fantasmas;
     private ArrayList<Proyectil> proyectilesJugador;
 
+    public boolean isGameOver;
+    public int puntaje;
+
     public Juego(PApplet sketch, Jugador jugador) {
+        this.sketch = sketch;
+        this.jugador = jugador;
+        this.fantasmas = new ArrayList<>();
         this.proyectilesJugador = new ArrayList<>();
+        this.isGameOver = false;
+        this.puntaje = 0;
     }
 
     public void agregarProyectilJugador(Proyectil p) {
