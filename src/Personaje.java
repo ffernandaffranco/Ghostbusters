@@ -45,11 +45,11 @@ public class Personaje {
         return distancia < this.radio + p.getRadio();
     }
 
-    public void recibirDaño(int danio) {
-        this.vida -= danio;
-    }
+//    public void recibirDaño(int danio) { // esto lo metemos adentro de hayColision para restar 1 vida si hayColision = true?
+//        this.vida -= danio;
+//    }
 
-//    public boolean estaVivo() {
+//    public boolean estaVivo() { // hace falta este metodo?
 //        return this.vida > 0;
 //    }
 

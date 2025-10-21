@@ -1,10 +1,12 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Fantasma extends Entidad {
+public class Fantasma extends Personaje {
 
     private int puntosDeVida = 1;
     public int score = 10;
+    // private PImage spriteDeFantasma
+    // private PImage spriteDelProyectilMalo
 
     public Fantasma(PApplet sketch, float x, float y, PImage imagen, int velocidad, int puntosDeVida) {
         super(sketch, x, y, imagen, velocidad);
@@ -29,10 +31,10 @@ public class Fantasma extends Entidad {
         return this.x < -this.getAncho();
     }
 
-    public Proyectil disparar(PImage imagenProyectilEnemigo) {
+    public Proyectil disparar() {
         if (sketch.random(1) < 0.005) {
-            float posX = this.x;
-            float posY = this.y + this.getAlto() / 2;
+            float posX = this.x + this.radio
+            float posY = this.y
             return new Proyectil(sketch, posX, posY, imagenProyectilEnemigo, 8, -1);
         }
         return null;

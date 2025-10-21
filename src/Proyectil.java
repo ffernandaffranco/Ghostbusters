@@ -41,6 +41,12 @@ public class Proyectil {
         return this.x < -this.radio || this.x > sketch.width + this.radio;
     }
 
+    // preguntar si hacemos un if para borrar o no el proyectil, va adentro del metodo estaFueraDePantalla o va en draw() en Processing?
+
+//    public boolean estaActivo() {
+//        return estaActivo;
+//    }
+
     public void destruir() {
         this.estaActivo = false;
     }
@@ -56,8 +62,7 @@ public class Proyectil {
     public int getRadio() {
         return radio;
     }
-
-    public boolean estaActivo() {
-        return estaActivo;
-    }
 }
+
+
+// podemos hacer dos arraylist proyectilesBuenos<Proyectil> y proyectilesMalos<Proyectil>? Pueden ser dos arrays con el mismo tipo de objeto? O es mejor separarlos en dos clases ProyectilBueno y ProyectilMalo?

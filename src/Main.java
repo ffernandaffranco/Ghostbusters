@@ -16,8 +16,10 @@ public class Main extends PApplet {
 //        }
 //
 //        if (key == ' ') {
-//            Proyectil p = jugador.disparar();
-//            juego.agregarProyectilJugador(p);
+//            Proyectil p = Leila.disparar();
+//            agregarProyectilBueno(p);
 //        }
 //    }
 //}
+
+ProyectilesBuenos<Proyectil> { .................. }
