@@ -2,15 +2,11 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Leila extends Personaje {
-
-    public static PImage spriteLeila;
     public static PImage spriteProyectil;
-    // float x,y se carga llamando al constructor o lo definimos en los atributos de Cazafantasma?
 
-    public Leila(PApplet sketch, float x, float y) {
-
-        super(sketch, x, y, spriteLeila, 3 , 1 ,3)
-        // vida = 3, velocidad = 1, radio = 3
+    public Leila(PApplet sketch, float x, float y, PImage imagen, int vida, int velocidad, int radio, PImage spriteProyectil) {
+        super(sketch, x, y, imagen, vida, velocidad, radio);
+        this.spriteProyectil = spriteProyectil;
     }
 
     @Override
@@ -22,7 +18,6 @@ public class Leila extends Personaje {
 
     @Override
     public Proyectil disparar() {
-        // esto es generico porque no tenemos imagen todavia y no sabemos de donde sale el tiro
         float posX = this.x + this.radio;
         float posY = this.y;
 
@@ -37,7 +32,6 @@ public class Leila extends Personaje {
         this.y += this.velocidad * direccion;
         this.y = sketch.constrain(this.y, 0 + this.radio, sketch.height - this.radio);
         // constrain(valor, minimo, maximo)
-        // la posición y está entre el minimo y el maximo?
         // si se quiere pasar entonces lo frena
         // ver PApplet.constrain()
     }

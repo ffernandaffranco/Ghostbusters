@@ -42,16 +42,18 @@ public abstract class Personaje {
         objetos si la distancia entre ambos centros es menor a la suma de sus dos radios.
          */
         float distancia = sketch.dist(this.x, this.y, p.getX(), p.getY());
-        return distancia < this.radio + p.getRadio();
+
+        boolean colision = distancia < this.radio + p.getRadio();
+
+        if (colision) {
+            this.vida -= 1;
+            if (this.vida <= 0) {
+                // GAME OVER
+            }
+        }
+
+        return colision;
     }
-
-//    public void recibirDanio(int danio) { // esto lo metemos adentro de hayColision para restar 1 vida si hayColision = true?
-//        this.vida -= danio;
-//    }
-
-//    public boolean estaVivo() { // hace falta este metodo o chequeamos la condición directamente en el draw()?
-//        return this.vida > 0;
-//    }
 
     public float getX() {
         return x;

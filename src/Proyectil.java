@@ -10,8 +10,9 @@ public class Proyectil {
     private int radio;
     private int direccion;
     private boolean estaActivo;
+    private boolean esAliado;
 
-    public Proyectil(PApplet sketch, float x, float y, PImage imagen, int velocidad, int radio, int direccion) {
+    public Proyectil(PApplet sketch, float x, float y, PImage imagen, int velocidad, int radio, int direccion, boolean esAliado) {
         this.sketch = sketch;
         this.x = x;
         this.y = y;
@@ -19,7 +20,8 @@ public class Proyectil {
         this.velocidad = velocidad;
         this.radio = radio;
         this.direccion = direccion;
-        this.estaActivo = true;
+        this.estaActivo = true; // los proyectiles arrancan activos
+        this.esAliado = esAliado;
     }
 
     public void mover() {
@@ -45,6 +47,10 @@ public class Proyectil {
         return estaActivo;
     }
 
+    public boolean esAliado() {
+        return esAliado;
+    }
+
     public void destruir() {
         this.estaActivo = false;
     }
@@ -61,11 +67,3 @@ public class Proyectil {
         return radio;
     }
 }
-
-
-/* para diferenciar los proyectiles buenos de los malos:
-opcion 1: hacer dos arraylist separados que contengan objetos de la clase Proyectil
-opcion 2: hacer dos arraylist separados. uno contiene objetos de la clase ProyectilAliado y el otro ProyectilEnemigo
-
-cosas que varian por ahora entre proyectiles aliados y enemigos: imagen y dirección
- */
