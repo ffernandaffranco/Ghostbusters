@@ -3,40 +3,41 @@ import processing.core.PImage;
 
 public class Fantasma extends Personaje {
 
-    private int puntosDeVida = 1;
-    public int score = 10;
-    // private PImage spriteDeFantasma
-    // private PImage spriteDelProyectilMalo
+    public static PImage spriteFantasma;
+    public static PImage spriteProyectilEnemigo;
+    public int score;
 
-    public Fantasma(PApplet sketch, float x, float y, PImage imagen, int velocidad, int puntosDeVida) {
-        super(sketch, x, y, imagen, velocidad);
-        this.puntosDeVida = puntosDeVida;
-        this.score = score;
+    public Fantasma(PApplet sketch, float x, float y) {
+
+        // imagen = spriteFantasma, vida = 1, velocidad = 2, radio = 20
+        super(sketch, x, y, spriteFantasma, 1, 2, 20);
+        this.score = 10;
     }
 
     @Override
     public void mover() {
-        this.x -= this.velocidad; // ejemplo boludo: el fantasma se mueve constantemente hacia la izquierda a una velocidad constante
+        this.x -= this.velocidad; // ejemplo: el fantasma se mueve hacia la izquierda a velocidad constante
     }
 
-    public void recibirDaño() {
-        this.puntosDeVida--;
-    }
-
-    public boolean estaVivo() {
-        return this.puntosDeVida > 0;
-    }
-
-    public boolean estaFueraDePantalla() { // para saber si se fue de la pantalla, lo podemos usar para borrar entidades que no veamos
-        return this.x < -this.getAncho();
-    }
-
+    @Override
     public Proyectil disparar() {
-        if (sketch.random(1) < 0.005) {
-            float posX = this.x + this.radio
-            float posY = this.y
-            return new Proyectil(sketch, posX, posY, imagenProyectilEnemigo, 8, -1);
+        if (sketch.random(1) < 0.005) { // probabilidad de %0.5 en cada frame de disparar
+            float posX = this.x - this.radio;
+            float posY = this.y;
+
+            int velProyectil = 8;
+            int radioProyectil = 8;
+            int dirProyectil = -1;
+
+            return new Proyectil(sketch, posX, posY, spriteProyectilEnemigo, velProyectil, radioProyectil, dirProyectil);
         }
+
+        // si no dispara, no devuelve nada
         return null;
     }
+
+    public boolean estaFueraDePantalla() { // para saber si se fue de la pantalla, lo podemos usar para borrarlos
+        return this.x < -this.radio();
+    }
+
 }

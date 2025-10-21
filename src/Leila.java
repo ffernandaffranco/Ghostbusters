@@ -3,58 +3,46 @@ import processing.core.PImage;
 
 public class Leila extends Personaje {
 
-    private int vidas = 3;
-    private int velocidad = 1;
-    private int radio = 3;
-    // private PImage spriteDeLeila
-    // private PImage spriteDelProyectilBueno
-    // float x,y se carga dentro de draw() llamando al constructor o lo definimos en los atributos de Cazafantasma
+    public static PImage spriteLeila;
+    public static PImage spriteProyectil;
+    // float x,y se carga llamando al constructor o lo definimos en los atributos de Cazafantasma?
 
-    public Leila(PApplet sketch, float x, float y, PImage imagen, int vida, int velocidad, int radio) {
-        this.vidas = vida;
-        this.x = x;
-        this.y = y;
-        this.sketch = sketch;
-        this.imagen = imagen;
-        this.velocidad = velocidad;
-        this.radio = radio;
-    }
+    public Leila(PApplet sketch, float x, float y) {
 
-    public Proyectil disparar() {
-        // el proyectil se crea delante del jugador
-        // podriamos asignar un shotpoint directamente
-        // esto es generico porque no tenemos imagen todavia y no sabemos de donde sale el tiro
-        float posX = this.x + this.radio
-        float posY = this.y
-
-        return new Proyectil(sketch, posX, posY, imagenProyectil, 15, 1);
-        // return new ProyectilBueno(sketch, posX, posY, imagenProyectil, 15, 1);
-    }
-
-    public void perderVida() {
-        this.vidas--;
-    }
-
-    public boolean estaVivo() {
-        return this.vidas > 0;
-    }
-
-    public int getVidas() {
-        return this.vidas;
+        super(sketch, x, y, spriteLeila, 3 , 1 ,3)
+        // vida = 3, velocidad = 1, radio = 3
     }
 
     @Override
     public void mover() {
         // Para cumplir con la herencia
-        // Sería buena idea no heredar mover() si no vamos a usarlo?
+        // Sería buena idea no heredar mover() si no vamos a usarlo? Borrarlo de Personaje y dejarlo solo en Fantasma
         // le podemos dar movimiento desde Processing con keyPressed()
     }
 
+    @Override
+    public Proyectil disparar() {
+        // esto es generico porque no tenemos imagen todavia y no sabemos de donde sale el tiro
+        float posX = this.x + this.radio;
+        float posY = this.y;
+
+        int velocidadProyectil = 15;
+        int radioProyectil = 8;
+        int direccionProyectil = 1;
+
+        return new Proyectil(sketch, posX, posY, spriteProyectil, velocidadProyectil, radioProyectil, direccionProyectil);
+    }
+
     public void mover(int direccion) {
-        this.y = this.y + (velocidad * direccion);
-        this.y = PApplet.constrain(this.y, 0, sketch.height - this.getAlto());
-        // lo ponemos, tenemos que profundizar
-        // la última línea es para definir límites en el movimiento del jugador para que no se vaya de la pantalla
+        this.y += this.velocidad * direccion;
+        this.y = sketch.constrain(this.y, 0 + this.radio, sketch.height - this.radio);
+        // constrain(valor, minimo, maximo)
+        // la posición y está entre el minimo y el maximo?
+        // si se quiere pasar entonces lo frena
         // ver PApplet.constrain()
+    }
+
+    public int getVidas() {
+        return this.vida;
     }
 }

@@ -41,11 +41,9 @@ public class Proyectil {
         return this.x < -this.radio || this.x > sketch.width + this.radio;
     }
 
-    // preguntar si hacemos un if para borrar o no el proyectil, va adentro del metodo estaFueraDePantalla o va en draw() en Processing?
-
-//    public boolean estaActivo() {
-//        return estaActivo;
-//    }
+    public boolean estaActivo() {
+        return estaActivo;
+    }
 
     public void destruir() {
         this.estaActivo = false;
@@ -65,4 +63,9 @@ public class Proyectil {
 }
 
 
-// podemos hacer dos arraylist proyectilesBuenos<Proyectil> y proyectilesMalos<Proyectil>? Pueden ser dos arrays con el mismo tipo de objeto? O es mejor separarlos en dos clases ProyectilBueno y ProyectilMalo?
+/* para diferenciar los proyectiles buenos de los malos:
+opcion 1: hacer dos arraylist separados que contengan objetos de la clase Proyectil
+opcion 2: hacer dos arraylist separados. uno contiene objetos de la clase ProyectilAliado y el otro ProyectilEnemigo
+
+cosas que varian por ahora entre proyectiles aliados y enemigos: imagen y dirección
+ */

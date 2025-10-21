@@ -1,7 +1,7 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Personaje {
+public abstract class Personaje {
 
     protected PApplet sketch;
     protected float x, y;
@@ -28,7 +28,7 @@ public class Personaje {
         if (imagen != null) {
             sketch.image(this.imagen, this.x, this.y);
         } else {
-            // dibuja un circulo si no hay imagen, para que podamos probar las hitbox
+            // Dibuja un circulo si no hay imagen para que podamos probar las hitbox.
             sketch.noFill();
             sketch.stroke(255, 0, 0);
             sketch.ellipse(this.x, this.y, this.radio * 2, this.radio * 2);
@@ -37,19 +37,19 @@ public class Personaje {
     }
 
     public boolean hayColision(Proyectil p) {
-        /* esto es lo que explico el profesor para gestionar las colisiones. las hitbox de los objetos son circulares,
-        entonces desde cualquier punto del borde al centro hay la misma distancia (radio r). hay colision entre dos
-        objetos si la distancia entre ambos centros es menor a la suma de los dos radios.
+        /* Esto es lo que explico el profesor para gestionar las colisiones. Las hitbox de los objetos son circulares,
+        entonces desde cualquier punto del borde al centro hay la misma distancia (radio r). Hay colision entre dos
+        objetos si la distancia entre ambos centros es menor a la suma de sus dos radios.
          */
         float distancia = sketch.dist(this.x, this.y, p.getX(), p.getY());
         return distancia < this.radio + p.getRadio();
     }
 
-//    public void recibirDaño(int danio) { // esto lo metemos adentro de hayColision para restar 1 vida si hayColision = true?
+//    public void recibirDanio(int danio) { // esto lo metemos adentro de hayColision para restar 1 vida si hayColision = true?
 //        this.vida -= danio;
 //    }
 
-//    public boolean estaVivo() { // hace falta este metodo?
+//    public boolean estaVivo() { // hace falta este metodo o chequeamos la condición directamente en el draw()?
 //        return this.vida > 0;
 //    }
 
