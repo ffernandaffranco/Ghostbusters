@@ -1,12 +1,12 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Jugador extends Entidad {
+public class Cazafantasma extends Entidad {
 
     private int vidas = 3;
     private PImage imagenProyectil;
 
-    public Jugador(PApplet sketch, float x, float y, PImage imagen, PImage imagenProyectil) {
+    public Cazafantasma(PApplet sketch, float x, float y, PImage imagen, PImage imagenProyectil) {
         super(sketch, x, y, imagen, velocidad);
         this.vidas = vidasIniciales;
         this.imagenProyectil = imagenProyectil;
