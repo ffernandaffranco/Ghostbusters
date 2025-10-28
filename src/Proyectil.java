@@ -20,7 +20,7 @@ public class Proyectil {
         this.velocidad = velocidad;
         this.radio = radio;
         this.direccion = direccion;
-        this.estaActivo = true; // los proyectiles arrancan activos
+        this.estaActivo = true;
         this.esAliado = esAliado;
     }
 
@@ -55,15 +55,7 @@ public class Proyectil {
         this.estaActivo = false;
     }
 
-    public float getX() {
-        return x;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public int getRadio() {
-        return radio;
-    }
+    public float getX() { return x; }
+    public float getY() { return y; }
+    public int getRadio() { return radio; }
 }

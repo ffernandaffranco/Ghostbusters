@@ -21,14 +21,13 @@ public abstract class Personaje {
     }
 
     public abstract void mover();
-
     public abstract Proyectil disparar();
 
     public void dibujar() {
         if (imagen != null) {
             sketch.image(this.imagen, this.x, this.y);
         } else {
-            // Dibuja un circulo si no hay imagen para que podamos probar las hitbox.
+            // Dibuja un circulo si no hay imagen para que podamos probar las hitbox
             sketch.noFill();
             sketch.stroke(255, 0, 0);
             sketch.ellipse(this.x, this.y, this.radio * 2, this.radio * 2);
@@ -37,33 +36,16 @@ public abstract class Personaje {
     }
 
     public boolean hayColision(Proyectil p) {
-        /* Esto es lo que explico el profesor para gestionar las colisiones. Las hitbox de los objetos son circulares,
-        entonces desde cualquier punto del borde al centro hay la misma distancia (radio r). Hay colision entre dos
-        objetos si la distancia entre ambos centros es menor a la suma de sus dos radios.
-         */
-        float distancia = sketch.dist(this.x, this.y, p.getX(), p.getY());
-
+        float distancia = PApplet.dist(this.x, this.y, p.getX(), p.getY());
         boolean colision = distancia < this.radio + p.getRadio();
 
         if (colision) {
             this.vida -= 1;
-            if (this.vida <= 0) {
-                // GAME OVER
-            }
         }
-
         return colision;
     }
 
-    public float getX() {
-        return x;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public int getRadio() {
-        return radio;
-    }
+    public float getX() { return x; }
+    public float getY() { return y; }
+    public int getRadio() { return radio; }
 }

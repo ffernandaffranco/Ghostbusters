@@ -1,25 +1,35 @@
-import processing.core.PApplet;
-import processing.core.PImage;
+// Este es Main.pde !! Para que corra hay que crear la pestaña Main en Processing y copiar y pegar esto.
 
-public class Main extends PApplet {
-    // aca iria main, settings, setup, draw, keyPressed
+GameManager gameManager;
+
+public static void main(String[] args) {
+    PApplet.main("Main");
 }
 
-//void main() {
-//
-//    @Override
-//    public void keyPressed() {
-//        if (keyCode == UP) {
-//            jugador.mover(-1); // no es un error, Processing funciona así, el origen de coordenadas esta en la esquina superior izquierda
-//        } else if (keyCode == DOWN) {
-//            jugador.mover(1);
-//        }
-//
-//        if (key == ' ') {
-//            Proyectil p = Leila.disparar();
-//            agregarProyectilBueno(p);
-//        }
-//    }
-//}
+@Override
+public void settings() {
+    size(800, 600); // Tamaño de la ventana.
+}
 
-ProyectilesBuenos<Proyectil> { .................. }
+/* Se ejecuta una sola vez al inicio del programa.
+* Aca iría toda la configuración estática, en este caso crea la instancia del GameManager.*/
+@Override
+public void setup() {
+    imageMode(CENTER);
+    gameManager = new GameManager(this);
+}
+
+/* Se ejecuta 60 veces por segundo por defecto en Proccessing pero lo podemos cambiar.
+Le delega toda la lógica y el dibujado al GameManager.
+ */
+@Override
+public void draw() {
+    gameManager.actualizar();
+    gameManager.dibujar();
+}
+
+/* Es para la lógica de movimiento de Leila */
+@Override
+public void keyPressed() {
+    gameManager.manejarInput(key, keyCode);
+}
