@@ -83,3 +83,4 @@ public void mousePressed() {
 public void keyReleased() {
     gameManager.manejarKeyReleased(key, keyCode);
 }
+
