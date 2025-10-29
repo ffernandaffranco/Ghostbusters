@@ -31,11 +31,6 @@ public class Fantasma extends Personaje {
 
             return new Proyectil(sketch, posX, posY, this.spriteProyectilEnemigo, velProyectil, radioProyectil, dirProyectil, esAliado);
         }
-        return null; // Si no dispara devuelve null. El GameManager tiene que saber que hacer con este null porque sino nos
-        // va a tirar error.
-    }
-
-    public boolean estaFueraDePantalla() {
-        return this.x < -this.radio;
+        return null; // Si no dispara devuelve null. El GameManager tiene que saber que hacer con este null.
     }
 }

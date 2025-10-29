@@ -45,6 +45,15 @@ public abstract class Personaje {
         return colision;
     }
 
+    public boolean estaFueraDePantalla() {
+        boolean fueraPorLaIzquierda = this.x < -this.radio;
+        boolean fueraPorLaDerecha = this.x > sketch.width + this.radio;
+        boolean fueraPorArriba = this.y < -this.radio;
+        boolean fueraPorAbajo = this.y > sketch.height + this.radio;
+
+        return fueraPorLaIzquierda || fueraPorLaDerecha || fueraPorArriba || fueraPorAbajo;
+    }
+
     public float getX() { return x; }
     public float getY() { return y; }
     public int getRadio() { return radio; }

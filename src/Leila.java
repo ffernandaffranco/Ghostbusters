@@ -5,6 +5,15 @@ public class Leila extends Personaje {
 
     private PImage spriteProyectil;
 
+    private boolean arribaPresionado = false;
+    private boolean abajoPresionado = false;
+    private boolean izquierdaPresionado = false;
+    private boolean derechaPresionado = false;
+    
+    private int tiempoUltimoDisparo = 0;
+    private final int COOLDOWN_DISPARO = 20; // frames de espera entre disparo y disparo
+
+
     public Leila(PApplet sketch, float x, float y, PImage imagen, int vida, int velocidad, int radio, PImage spriteProyectil) {
         super(sketch, x, y, imagen, vida, velocidad, radio);
         this.spriteProyectil = spriteProyectil;
@@ -12,60 +21,74 @@ public class Leila extends Personaje {
 
     @Override
     public void mover() {
-        /* Cuando declaro en GameManager la lista 'ArrayList<Personaje> enemigos' el compilador sabe que tengo una lista
-        de objetos que son instancias de una clase hija de Personaje.
+        int direccionX = 0;
+        int direccionY = 0;
 
-        Durante la ejecución del juego esa lista podría contener Fantasma, Zombie, Vampiro, o cualquier tipo de Personaje.
-        Si yo quiero mover a todos los enemigos al mismo tiempo independientemente de su clase entonces voy a tener que
-        usar un bucle 'for (Personaje enemigo : enemigos)' y llamar a mover(). Como la lista es una lista de enemigos que
-        heredan de Personaje, el compilador sabe que están obligados a implementar el metodo mover(). Es por esto que puedo
-        usar esta lógica de mover a todos los enemigos al mismo tiempo.
-
-        ¿Qué pasa si borro 'abstract void mover()' de Personaje? El compilador ahora no sabe si todos los enemigos
-        tienen mover(), y no puedo llamar a mover() directamente.
-
-        Es por eso que no borré el metodo abstracto mover() de Personaje.
-
-        ¿Cómo se puede solucionar esto?
-
-        Opcion 1: Podemos sacar el metodo de Personaje y cambiar la lógica de movimiento de los enemigos durante la ejecución
-        del juego. La idea sería la siguiente: para cada enemigo de la lista enemigos preguntarle si pertenece a una clase
-        en particular que si tenga mover(). Esto es fácil ahora que solo tenemos una clase de enemigos (Fantasma) pero se puede
-        complicar a medida que vayamos añadiendo otros tipos de enemigos. De ambas formas no creo que lleguemos a tener
-        más de 2 o 3 así que es una opción a considerar.
-
-        Por cada enemigo de la lista {
-            Es un fantasma? {
-                mover() }
-            Es un zombie? {
-                mover() }
-            Es un vampiro? {
-                mover() }
+        if (arribaPresionado) {
+            direccionY = -1;
         }
+        if (abajoPresionado) {
+            direccionY = 1;
+        }
+        if (izquierdaPresionado) {
+            direccionX = -1;
+        }
+        if (derechaPresionado) {
+            direccionX = 1;
+        }
+        
+        if (direccionX != 0 || direccionY != 0) {
+            this.x += this.velocidad * direccionX;
+            this.x = PApplet.constrain(this.x, 0 + this.radio, sketch.width - this.radio);
 
-        Y así tendríamos que hacer con cada clase de enemigos.
-
-        Opcion 2: Hacer que los enemigos y Leila no hereden de la misma clase. De esa forma podríamos implementar una
-        clase Enemigo con un metodo abstracto mover(), y hacer de Leila su propia clase que no hereda de nadie.
-         */
+            this.y += this.velocidad * direccionY;
+            this.y = PApplet.constrain(this.y, 0 + this.radio, sketch.height - this.radio);
+        }
     }
 
     @Override
     public Proyectil disparar() {
-        float posX = this.x + this.radio;
-        float posY = this.y;
+        if (sketch.keyPressed && sketch.key == ' ') { 
+            
+            int frameActual = sketch.frameCount;
+            if (frameActual - tiempoUltimoDisparo >= COOLDOWN_DISPARO) {
+                
+                tiempoUltimoDisparo = frameActual; 
 
-        int velProyectil = 15;
-        int radioProyectil = 8;
-        int dirProyectil = 1;
-        boolean esAliado = true;
-
-        return new Proyectil(sketch, posX, posY, this.spriteProyectil, velProyectil, radioProyectil, dirProyectil, esAliado);
+                float posX = this.x + this.radio;
+                float posY = this.y;
+                int velProyectil = 15;
+                int radioProyectil = 8;
+                int dirProyectil = 1;
+                boolean esAliado = true;
+                return new Proyectil(sketch, posX, posY, this.spriteProyectil, velProyectil, radioProyectil, dirProyectil, esAliado);
+            }
+        } 
+        return null; 
     }
 
-    public void mover(int direccion) {
-        this.y += this.velocidad * direccion;
-        this.y = PApplet.constrain(this.y, 0 + this.radio, sketch.height - this.radio);
+    public void manejarKeyPressed(int keyCode) {
+        if (keyCode == PApplet.UP) {
+            arribaPresionado = true;
+        } else if (keyCode == PApplet.DOWN) {
+            abajoPresionado = true;
+        } else if (keyCode == PApplet.LEFT) {
+            izquierdaPresionado = true;
+        } else if (keyCode == PApplet.RIGHT) {
+            derechaPresionado = true;
+        }
+    }
+
+    public void manejarKeyReleased(int keyCode) {
+         if (keyCode == PApplet.UP) {
+            arribaPresionado = false;
+        } else if (keyCode == PApplet.DOWN) {
+            abajoPresionado = false;
+        } else if (keyCode == PApplet.LEFT) {
+            izquierdaPresionado = false;
+        } else if (keyCode == PApplet.RIGHT) {
+            derechaPresionado = false;
+        }
     }
 
     public int getVidas() {
